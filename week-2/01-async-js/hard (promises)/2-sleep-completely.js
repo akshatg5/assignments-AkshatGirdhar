@@ -4,7 +4,13 @@
  * the function should return a promise just like before
  */
 
-function sleep(milliseconds) {
+function sleep(milliseconds) {// using simple new promise initialization like done before
+    const p = new Promise((resolve) => { 
+        setTimeout(() => { //will halt the thread for the given milliseconds, setTimeout is an async function
+            resolve() // the function will return resolve just as mentioned in the quesiton
+        },milliseconds)
+    });
+    return p; // returning the promise as mentioned
 }
 
 module.exports = sleep;
