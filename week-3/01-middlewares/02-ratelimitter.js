@@ -16,6 +16,26 @@ setInterval(() => {
     numberOfRequestsForUser = {};
 }, 1000)
 
+app.use((req,res,next) => {
+    const userId = req.headers['user-id'];
+
+    //check if user-id exists in numberOfRequestsForUser object
+    if (userId in numberOfRequestsForUser) {
+      if (numberOfRequestsForUser[userId] >= 5) {
+        return res.status(404).json({'msg' : 'Error'})
+      }
+
+      // increment the request count for the user 
+      numberOfRequestsForUser[userId]++;
+    } else {
+      // if userId doesn't exist, initialize the request count for the user
+      numberOfRequestsForUser[userId] = 1;
+    }
+
+    //calling next to move to the next middleware
+    next();
+})
+
 app.get('/user', function(req, res) {
   res.status(200).json({ name: 'john' });
 });
