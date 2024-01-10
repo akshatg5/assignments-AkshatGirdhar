@@ -1,6 +1,6 @@
-const request = require('supertest');
-const assert = require('assert');
-const express = require('express');
+const request = require("supertest");
+const assert = require("assert");
+const express = require("express");
 const app = express();
 // You have been given an express server which has a few endpoints.
 // Your task is to create a global middleware (app.use) which will
@@ -13,35 +13,34 @@ const app = express();
 
 let numberOfRequestsForUser = {};
 setInterval(() => {
-    numberOfRequestsForUser = {};
-}, 1000)
+  numberOfRequestsForUser = {};
+}, 1000);
 
-app.use((req,res,next) => {
-    const userId = req.headers['user-id'];
+app.use(function (req, res, next) {
+  const userId = req.headers["user-id"];
 
-    //check if user-id exists in numberOfRequestsForUser object
-    if (userId in numberOfRequestsForUser) {
-      if (numberOfRequestsForUser[userId] >= 5) {
-        return res.status(404).json({'msg' : 'Error'})
-      }
-
-      // increment the request count for the user 
-      numberOfRequestsForUser[userId]++;
+  //will check if the userId count already exists in the numberOfRequestsForUser object or not
+  if (numberOfRequestsForUser[userId]) {
+    numberOfRequestsForUser[userId] = numberOfRequestsForUser[userId] + 1;
+    if (numberOfRequestsForUser > 5) {
+      res.status(404).send("Stop");
     } else {
-      // if userId doesn't exist, initialize the request count for the user
-      numberOfRequestsForUser[userId] = 1;
+      next();
     }
-
-    //calling next to move to the next middleware
-    next();
-})
-
-app.get('/user', function(req, res) {
-  res.status(200).json({ name: 'john' });
+  } 
+  //else statement means if there are no existing requests for the given user then we have to initialize the user in th object
+  else {
+    numberOfRequestsForUser[userId] = 1;
+    next()
+  }
 });
 
-app.post('/user', function(req, res) {
-  res.status(200).json({ msg: 'created dummy user' });
+app.get("/user", function (req, res) {
+  res.status(200).json({ name: "john" });
+});
+
+app.post("/user", function (req, res) {
+  res.status(200).json({ msg: "created dummy user" });
 });
 
 module.exports = app;
