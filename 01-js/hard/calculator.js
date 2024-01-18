@@ -16,6 +16,66 @@
   Once you've implemented the logic, test your code by running
 */
 
-class Calculator {}
+
+const math = require('mathjs');
+
+class Calculator{
+
+  constructor() {
+    this.result = 0;
+  }
+
+  add(num) {
+    this.result += num;
+  }
+
+  subtract (num) {
+    this.result -= num;
+  }
+
+  multiply(num) {
+    this.result *= num
+  }
+
+  divide (num) {
+    if(num === 0) {
+      throw new Error("Cannot divide by 0.")
+    }
+    this.result /= num;
+  }
+
+  clear() {
+    this.result = 0;
+  }
+
+  getResult() {
+    return this.result;
+  }
+
+  calculate(expression) {
+    const exp_arr = expression;
+    const clean_exp = exp_arr.split(' ').join('')
+
+    //checking the valid chars in the expression:
+  const valid_exp = /^[0-9+\-*/().]+$/g;
+
+  if (!valid_exp) {
+    throw new Error("Invalid exp");
+  }
+
+  try {
+    this.result = math.evaluate(clean_exp);
+  } catch(error) {
+    throw new Error("Invalid exp");
+  }
+
+  if (this.result === Infinity) {
+    throw new Error("Cannot divide by 0");
+  }
+
+  return this.result;
+  }
+}
+
 
 module.exports = Calculator;

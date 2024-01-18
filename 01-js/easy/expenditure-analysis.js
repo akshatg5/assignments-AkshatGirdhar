@@ -14,7 +14,35 @@
 */
 
 function calculateTotalSpentByCategory(transactions) {
-  return [];
-}
+  
+  let ansArr = [];
+  let totalSpent = [];
+  
+  
+  for(let i=0; i<transactions.length; i++){
+    
+    // storing elements of category in selected variable 
+    let selected = transactions[i];
 
-module.exports = calculateTotalSpentByCategory;
+    // if category is not present in categories array then push it and also push its price in totalSpent array
+    if(!totalSpent[selected.category]){
+       totalSpent[selected.category] = selected.price;
+    }
+    
+    // if category is already present in categories array then add its price in totalSpent array
+    else{
+       totalSpent[selected.category] += selected.price;
+    }
+    
+  }
+  
+  // Adding in the ansArr
+  for(let i in totalSpent){
+    // pushing the object in ansArr
+    ansArr.push({ category: i, totalSpent: totalSpent[i]});
+  }
+  
+  return ansArr;
+  }
+  
+  module.exports = calculateTotalSpentByCategory;
