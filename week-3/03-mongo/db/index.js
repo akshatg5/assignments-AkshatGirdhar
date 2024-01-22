@@ -3,7 +3,7 @@ const express =  require('express')
 const app = express()
 
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://akshatgirdhar05:8SCcXb8VNSk68Rfc@cluster0.wjdqmfc.mongodb.net/CohortDB?');
+mongoose.connect('MongoDBConnectionString');
 
 // Define schemas
 //creating shcemas by defining the field and the type of the data that will be stored in the field
