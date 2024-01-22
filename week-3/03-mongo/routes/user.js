@@ -19,16 +19,52 @@ router.post("/signup", async (req, res) => {
   });
 });
 
-router.get("/courses", (req, res) => {
+router.get("/courses", async (req, res) => {
   // Implement listing all courses logic
+  //this can be an open endpoint where anyone can see the listings
+  const allCourses = await Course.find({});
+
+  res.json({ msg: allCourses });
 });
 
-router.post("/courses/:courseId", userMiddleware, (req, res) => {
+router.post("/courses/:courseId", userMiddleware, async (req, res) => {
   // Implement course purchase logic
+  const username = req.headers.username;
+  // const password = req.headers.password;
+
+  const courseId = req.params.courseId;
+
+  await User.updateOne(
+    {
+      username: username,
+    },
+    {
+      $push: {
+        purchasedCourses: courseId,
+      },
+    }
+  );
+
+  res.json({ msg: "Purchase complete" });
 });
 
-router.get("/purchasedCourses", userMiddleware, (req, res) => {
+router.get("/purchasedCourses", userMiddleware, async (req, res) => {
   // Implement fetching purchased courses logic
+
+  const username = req.headers.username;
+  const password = req.headers.password;
+
+  const user = await User.findOne({
+    username: username
+  })
+  console.log(user.purchasedCourses)
+  const courses = await Course.find({
+    _id : { //this variable has to be similar to the one in mongoDB
+      "$in" : user.purchasedCourses
+    }
+  })
+
+  res.json({courses : courses})
 });
 
 module.exports = router;
