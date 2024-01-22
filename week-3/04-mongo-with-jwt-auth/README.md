@@ -1,4 +1,7 @@
 ## Create a course selling website
+Akshat eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFrc2hhdCIsImlhdCI6MTcwNTkzOTg2Nn0.3JSgpWwF74SqZoymh_yK7riwnBQPeaVmTZvpKG6DTzE
+
+CaptainAmerica eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNhcHRhaW5BbWVyaWNhIiwiaWF0IjoxNzA1OTM5ODk1fQ.uJQitYVAx2SEHgogjivG6kTGK_CFstrbSPpSZcYEa00
 
 ### Description
 
@@ -50,3 +53,5 @@ You need to use mongodb to store all the data persistently.
   Description: Lists all the courses purchased by the user.
   Input: Headers: { 'Authorization': 'Bearer <your-token>' }
   Output: { purchasedCourses: [ { id: 1, title: 'course title', description: 'course description', price: 100, imageLink: 'https://linktoimage.com', published: true }, ... ] }
+
+user 4 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlVzZXIgNCIsImlhdCI6MTcwNTk0MTg5Nn0.ME_EMAXYg663NMpnCfLomU_qXDAKy07UhXoVfHrPI6U
