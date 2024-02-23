@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 const words = ["hi", "my", "name", "is", "for", "to", "random", "word" ];
 const TOTAL_LINES = 1000;
 const ALL_WORDS = [];
+
 for (let i = 0; i < TOTAL_LINES; i++) {
     let sentence = "";
     for (let j = 0; j < words.length; j++) {
@@ -23,9 +24,7 @@ export function Assignment2() {
     const filteredSentences = sentences.filter(x => x.includes(filter))
 
     return <div>
-        <input type="text" onChange={(e) => {
-            setFilter(e.target.value)
-        }}></input>
+        <input type="text"></input>
         {filteredSentences.map(word => <div>
             {word}    
         </div>)}
